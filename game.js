@@ -19,6 +19,9 @@ var round = [];
 // this is the cursor, which points to the position we're at in the round array
 var currentRound = 0;
 
+var hardcore = false;
+var hardcoreJump = 2;
+
 // this holds the game state and makes buttons clickable
 var gameState = "repeat" //start, listen, repeat, gameOver
 
@@ -39,6 +42,18 @@ function callbacks(){
 
 	// wire the restart button
 	document.getElementById("btnRepeat").addEventListener("click", restart)
+
+	//hardcore toggle
+	document.getElementById("hardcoreToggle").addEventListener("click", function(){
+		hardcore = !hardcore;
+
+		if (hardcore){
+			this.innerHTML = "I'm a beginner."
+		}
+		else{
+			this.innerHTML = "I'm not a beginner."
+		}
+	});
 }
 
 // this happens every time a field is clicked.
@@ -76,7 +91,12 @@ function fieldClicked(e, fieldNumber){
 function newRound(){
 	currentRound = 0;
 	gameState = "listen";
-	round.push(Math.floor(Math.random()*4));
+
+	for (var i = 0; i < hardcoreJump; i++) {
+		round.push(Math.floor(Math.random()*4));
+		if (!hardcore)
+			i = hardcoreJump
+	};
 
 	console.log("new round:")
 	console.log(round);
