@@ -20,7 +20,7 @@ var round = [];
 var currentRound = 0;
 
 var hardcore = false;
-var hardcoreJump = 2;
+var hardcoreJump = 3;
 
 // this holds the game state and makes buttons clickable
 var gameState = "repeat" //start, listen, repeat, gameOver
@@ -46,12 +46,15 @@ function callbacks(){
 	//hardcore toggle
 	document.getElementById("hardcoreToggle").addEventListener("click", function(){
 		hardcore = !hardcore;
+		restart();
 
 		if (hardcore){
 			this.innerHTML = "I'm a beginner."
+			document.body.classList.add("hardcore");
 		}
 		else{
 			this.innerHTML = "I'm not a beginner."
+			document.body.classList.remove("hardcore");
 		}
 	});
 }
